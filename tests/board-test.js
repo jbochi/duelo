@@ -24,49 +24,48 @@ exports.board_vows = vows.describe('board').addBatch({
 			assert.equal(topic.dimensions, dimensions);
 		},
 		'has no contents': function(topic) {
-			assert.isEmpty(topic.getContents(0, 0, 0));
+			assert.isEmpty(topic.getContents([0, 0, 0]));
 		},
 		'has no contents on corner': function(topic) {
-			assert.isEmpty(topic.getContents(dimensions[0] - 1,
-			                                 dimensions[1] - 1,
-							   			     dimensions[2] - 1));
+			assert.isEmpty(topic.getContents([dimensions[0] - 1,
+			                                  dimensions[1] - 1,
+							   			      dimensions[2] - 1]));
 		},
 		'raises error for contents on invalid position': function(topic) {
 			assert.throws(function () {
-				topic.getContents(dimensions[0], 0, 0);
+				topic.getContents([dimensions[0], 0, 0]);
 			}, board.InvalidPosition);
 		},
 		'can have content added to position': function (topic) {
 			assert.doesNotThrow(function () {
-				topic.addContents(0, 0, 0, wall);
+				topic.addContents([0, 0, 0], wall);
 			}, board.InvalidPosition);
 		},
 		'cannot have contents added to invalid position': function (topic) {
      		assert.throws(function () {
-				topic.addContents(-1, 0, 0);
+				topic.addContents([-1, 0, 0]);
 			}, board.InvalidPosition);
 		},
     },
 	'A content-aware Board': {
 		topic: function () {
 			var b = new Board(dimensions);
-			b.addContents(0, 0, 0, wall);
+			b.addContents([0, 0, 0], wall);
 			return b;
 		},
 		'should have contents': function (topic) {
-			assert.length(topic.getContents(0, 0, 0), 1);
+			assert.length(topic.getContents([0, 0, 0]), 1);
 		},
 		'can have more content added': function (topic) {
-			topic.addContents(0, 0, 0, wall);
-			assert.length(topic.getContents(0, 0, 0), 2);
+			topic.addContents([0, 0, 0], wall);
+			assert.length(topic.getContents([0, 0, 0]), 2);
 		},
 	},
 	'An euclidean Board': {
 		topic: function () { return new Board(dimensions) },
 		'has a side/radius ratio of 2/3 * sqrt(3)': function (topic) {
 			assert.almostEqual(topic.side/topic.radius, 
-			                   2.0 / Math.sqrt(3.0),
-							   6);
+			                   2.0 / Math.sqrt(3.0), 6);
 		},
 	},
 });
