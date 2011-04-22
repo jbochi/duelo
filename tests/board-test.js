@@ -87,6 +87,12 @@ exports.board_vows = vows.describe('board').addBatch({
 			assert.equal(topic.distance(topic.center([0, 0, 0]),
 			                            topic.center([1, 0, 0])),
 						 2.0 * topic.radius);
+	        assert.equal(topic.distance(topic.center([0, 0, 0]),
+			                            topic.center([0, 1, 0])),
+						 2.0 * topic.radius);
+	        assert.equal(topic.distance(topic.center([0, 0, 0]),
+			                            topic.center([2, 1, 0])),
+						 4.0 * topic.radius);
 		},
 	},
 	'Cell vertices': {
