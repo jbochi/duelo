@@ -11,6 +11,8 @@ assert.almostEqual = function (a, b, precision) {
 	return assert.equal(a.toPrecision(precision), b.toPrecision(precision));
 }
 
+var precision = 6;
+
 exports.board_vows = vows.describe('board').addBatch({
 	'A Board when created': {
 		topic: function () { return new Board(dimensions); },
@@ -65,7 +67,7 @@ exports.board_vows = vows.describe('board').addBatch({
 		topic: function () { return new Board(dimensions) },
 		'has a side/radius ratio of 2/3 * sqrt(3)': function (topic) {
 			assert.almostEqual(topic.side/topic.radius, 
-			                   2.0 / Math.sqrt(3.0), 6);
+			                   2.0 / Math.sqrt(3.0), precision);
 		},
 		'knows the center of (0, 0, 0)': function (topic) {
 			assert.deepEqual(topic.center([0, 0, 0]),
@@ -93,6 +95,22 @@ exports.board_vows = vows.describe('board').addBatch({
 	        assert.equal(topic.distance(topic.center([0, 0, 0]),
 			                            topic.center([2, 1, 0])),
 						 4.0 * topic.radius);
+		},
+		'knows some angles': function (topic) {
+        	assert.almostEqual(topic.angle([0, 0, 0], [1, 0, 0]),
+			                   -Math.PI/6, precision);
+            assert.almostEqual(topic.angle([0, 0, 0], [2, 1, 0]), 
+			                   -Math.PI/6, precision);
+            assert.almostEqual(topic.angle([2, 1, 0], [0, 0, 0]), 
+			                   5*Math.PI/6, precision);
+            assert.almostEqual(topic.angle([0, 0, 0], [2, 0, 0]), 
+			                   0, precision);
+            assert.almostEqual(topic.angle([2, 0, 0], [0, 0, 0]), 
+			                   Math.PI, precision);
+            assert.almostEqual(topic.angle([0, 0, 0], [0, 1, 0]), 
+			                   -Math.PI/2, precision);
+            assert.almostEqual(topic.angle([0, 1, 0], [0, 0, 0]), 
+			                   Math.PI/2, precision);
 		},
 	},
 	'Cell vertices': {
