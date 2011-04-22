@@ -7,6 +7,10 @@ var wall = {};
 
 var dimensions = [20, 20, 2];
 
+assert.almostEqual = function (a, b, precision) {
+	return assert.equal(a.toPrecision(precision), b.toPrecision(precision));
+}
+
 exports.board_vows = vows.describe('board').addBatch({
 	'A Board when created': {
 		topic: function () { return new Board(dimensions); },
@@ -43,7 +47,7 @@ exports.board_vows = vows.describe('board').addBatch({
 			}, board.InvalidPosition);
 		},
     },
-	'A Board with contents': {
+	'A content-aware Board': {
 		topic: function () {
 			var b = new Board(dimensions);
 			b.addContents(0, 0, 0, wall);
@@ -55,6 +59,14 @@ exports.board_vows = vows.describe('board').addBatch({
 		'can have more content added': function (topic) {
 			topic.addContents(0, 0, 0, wall);
 			assert.length(topic.getContents(0, 0, 0), 2);
+		},
+	},
+	'An euclidean Board': {
+		topic: function () { return new Board(dimensions) },
+		'has a side/radius ratio of 2/3 * sqrt(3)': function (topic) {
+			assert.almostEqual(topic.side/topic.radius, 
+			                   2.0 / Math.sqrt(3.0),
+							   6);
 		},
 	},
 });
