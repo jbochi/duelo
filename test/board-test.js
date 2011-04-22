@@ -31,7 +31,7 @@ exports.board_vows = vows.describe('board').addBatch({
         'has no contents on corner': function(topic) {
             assert.isEmpty(topic.getContents([dimensions[0] - 1,
                                               dimensions[1] - 1,
-                                                 dimensions[2] - 1]));
+                                              dimensions[2] - 1]));
         },
         'raises error for contents on invalid position': function(topic) {
             assert.throws(function () {
