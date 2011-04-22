@@ -67,5 +67,24 @@ exports.board_vows = vows.describe('board').addBatch({
 			assert.almostEqual(topic.side/topic.radius, 
 			                   2.0 / Math.sqrt(3.0), 6);
 		},
+		'knows the center of (0, 0, 0)': function (topic) {
+			assert.deepEqual(topic.center([0, 0, 0]),
+                             [topic.side, topic.radius, 0.0]);
+		},
+		'knows the center of (1, 0, 0)': function (topic) {
+            assert.deepEqual(topic.center([1, 0, 0]),
+                             [2.5 * topic.side, 2.0 * topic.radius, 0.0]);
+		},
+		'knows the center of (0, 1, 0)': function (topic) {
+			assert.deepEqual(topic.center([0, 1, 0]),
+                             [topic.side, 3.0 * topic.radius, 0.0]);
+		},
+		'knows the center of (2, 0, 0)': function (topic) {
+			assert.deepEqual(topic.center([2, 0, 0]),
+							 [4.0 * topic.side, topic.radius, 0.0]);
+		},
+		'has six vertices for each cell': function (topic) {
+			assert.length(topic.vertices([0, 0, 0]), 6);
+		},
 	},
 });
