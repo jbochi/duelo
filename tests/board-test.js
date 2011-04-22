@@ -83,8 +83,25 @@ exports.board_vows = vows.describe('board').addBatch({
 			assert.deepEqual(topic.center([2, 0, 0]),
 							 [4.0 * topic.side, topic.radius, 0.0]);
 		},
-		'has six vertices for each cell': function (topic) {
+		'neighbour cells are two radius apart': function (topic) {
+			assert.equal(topic.distance(topic.center([0, 0, 0]),
+			                            topic.center([1, 0, 0])),
+						 2.0 * topic.radius);
+		},
+	},
+	'Cell vertices': {
+		topic: function () {
+			return new Board(dimensions); 
+		},
+		'are six': function (topic) {
 			assert.length(topic.vertices([0, 0, 0]), 6);
+		},
+		'distance to center is equal to side': function (topic) {
+			var center = topic.center([0, 0, 0]);
+			var vertices = topic.vertices([0, 0, 0]);
+			for (var i  = 0; i < 6; i++) {
+				assert.equal(topic.distance(vertices[i], center), topic.side);
+			}
 		},
 	},
 });
