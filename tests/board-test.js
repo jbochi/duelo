@@ -96,11 +96,11 @@ exports.board_vows = vows.describe('board').addBatch({
 		'are six': function (topic) {
 			assert.length(topic.vertices([0, 0, 0]), 6);
 		},
-		'distance to center is equal to side': function (topic) {
+		'distance to center is equal to radius': function (topic) {
 			var center = topic.center([0, 0, 0]);
 			var vertices = topic.vertices([0, 0, 0]);
 			for (var i  = 0; i < 6; i++) {
-				assert.equal(topic.distance(vertices[i], center), topic.side);
+				assert.equal(topic.distance(vertices[i], center), topic.radius);
 			}
 		},
 	},
