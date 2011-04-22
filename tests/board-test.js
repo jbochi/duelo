@@ -86,14 +86,11 @@ exports.board_vows = vows.describe('board').addBatch({
 							 [4.0 * topic.side, topic.radius, 0.0]);
 		},
 		'neighbour cells are two radius apart': function (topic) {
-			assert.equal(topic.distance(topic.center([0, 0, 0]),
-			                            topic.center([1, 0, 0])),
+			assert.equal(topic.distance([0, 0, 0], [1, 0, 0]),
 						 2.0 * topic.radius);
-	        assert.equal(topic.distance(topic.center([0, 0, 0]),
-			                            topic.center([0, 1, 0])),
+	        assert.equal(topic.distance([0, 0, 0], [0, 1, 0]),
 						 2.0 * topic.radius);
-	        assert.equal(topic.distance(topic.center([0, 0, 0]),
-			                            topic.center([2, 1, 0])),
+	        assert.equal(topic.distance([0, 0, 0], [2, 1, 0]),
 						 4.0 * topic.radius);
 		},
 		'knows some angles': function (topic) {
@@ -124,7 +121,8 @@ exports.board_vows = vows.describe('board').addBatch({
 			var center = topic.center([0, 0, 0]);
 			var vertices = topic.vertices([0, 0, 0]);
 			for (var i  = 0; i < 6; i++) {
-				assert.equal(topic.distance(vertices[i], center), topic.radius);
+				assert.equal(topic.distance_points(vertices[i], center), 
+				             topic.radius);
 			}
 		},
 	},
