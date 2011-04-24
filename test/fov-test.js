@@ -3,15 +3,18 @@ var assert = require('assert'),
     Arc = require('../fov').Arc;
 
 vows.describe('Arc').addBatch({
-	'An arc': {
+	'Arc (0 - PI)': {
 		topic: function () {
 			return new Arc(0, Math.PI); 
 		},
-		'should have a start property': function (topic) {
+		'should start on 0': function (topic) {
 			assert.equal(topic.start, 0);
 		},
-		'should have an end property': function (topic) {
+		'should end on PI': function (topic) {
 			assert.equal(topic.end, Math.PI);
+		},
+		'should contain PI/2': function (topic) {
+			assert.contains(Math.PI/2);
 		},
 	},
 }).export(module);
