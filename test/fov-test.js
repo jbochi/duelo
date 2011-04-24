@@ -14,7 +14,7 @@ vows.describe('Arc').addBatch({
 			assert.equal(topic.end, Math.PI);
 		},
 		'should contain PI/2': function (topic) {
-			assert.contains(Math.PI/2);
+			assert.isTrue(topic.contains(Math.PI/2));
 		},
 	},
 }).export(module);
