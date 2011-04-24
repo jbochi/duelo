@@ -141,5 +141,23 @@ exports.board_vows = vows.describe('board').addBatch({
 							  [0, 2, 0],
 							  [0, 1, 0]]);
 		},
+		'should have twelve cells for radius two': function (topic) {
+			assert.deepEqual(topic.circle([2, 2, 0], 2),
+			                 [[2, 0, 0],
+							  [3, 0, 0],
+							  [4, 1, 0],
+							  [4, 2, 0],
+							  [4, 3, 0],
+							  [3, 3, 0],
+							  [2, 4, 0],
+							  [1, 3, 0],
+							  [0, 3, 0],
+							  [0, 2, 0],
+							  [0, 1, 0],
+							  [1, 0, 0]]);
+		},
+		'should have eighteen cells for radius three': function (topic) {
+			assert.length(topic.circle([3, 3, 0], 3), 18);
+		},
 	},
 });
