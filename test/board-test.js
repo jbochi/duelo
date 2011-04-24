@@ -159,5 +159,11 @@ exports.board_vows = vows.describe('board').addBatch({
 		'should have eighteen cells for radius three': function (topic) {
 			assert.length(topic.circle([3, 3, 0], 3), 18);
 		},
+		'should return only valid positions if in corner': function(topic) {
+			assert.deepEqual(topic.circle([0, 0, 0], 2), [[2, 0, 0],
+														  [2, 1, 0],
+														  [1, 1, 0],
+														  [0, 2, 0]]);
+		},
 	},
 });
