@@ -126,4 +126,20 @@ exports.board_vows = vows.describe('board').addBatch({
             }
         },
     },
+	'Circles on the Board': {
+		topic: function () { return new Board(dimensions); },
+		'should be the center for radius zero': function (topic) {
+			assert.deepEqual(topic.circle([0, 0, 0], 0),
+			                 [[0, 0, 0]]);
+		},
+		'should be the six neighbours for radius one': function (topic) {
+			assert.deepEqual(topic.circle([1, 1, 0], 1),
+			                 [[1, 0, 0],
+							  [2, 1, 0],
+							  [2, 2, 0],
+							  [1, 2, 0],
+							  [0, 2, 0],
+							  [0, 1, 0]]);
+		},
+	},
 });

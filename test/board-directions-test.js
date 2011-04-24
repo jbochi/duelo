@@ -12,7 +12,7 @@ function assertDirection(key, expected_delta) {
 		                 topic[1] + expected_delta[1], 
 						 topic[2] + expected_delta[2]];
 		
-		assert.deepEqual(b.getNeighbour(topic, b.directions[key]), 
+		assert.deepEqual(b.neighbour(topic, b.directions[key]), 
 		                 expected_cell);
 	};
 	
